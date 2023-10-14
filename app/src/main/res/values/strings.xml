@@ -1,0 +1,42 @@
+<resources>
+
+    <string name="app_name">Challenge4</string>
+
+    <string-array name="data_name">
+        <item>Dimsum</item>
+        <item>Sushi</item>
+        <item>Kentang</item>
+        <item>Burger</item>
+        <item>StrawberryMilk</item>
+        <item>Chicken</item>
+    </string-array>
+
+    <integer-array name="data_price">
+        <item>10000</item>
+        <item>15000</item>
+        <item>20000</item>
+        <item>15000</item>
+        <item>10000</item>
+        <item>50000</item>
+        <item>15000</item>
+        <item>20000</item>
+    </integer-array>
+
+    <integer-array name="data_photo">
+        <item>@drawable/dimsum</item>
+        <item>@drawable/sushi</item>
+        <item>@drawable/kentang</item>
+        <item>@drawable/burger</item>
+        <item>@drawable/strawberry_milk</item>
+        <item>@drawable/chicken</item>
+    </integer-array>
+
+    <string-array name="data_description">
+        <item>A Dimsum makanan paling dicari semua orang mau anak-anak, remaja, hingga dewasa!</item>
+        <item>A Sushi makanan favorit anak jaman now.</item>
+        <item>A Kentang Goreng pakai saus tomat.</item>
+        <item>A Burger big dengan varian baru dibalut saus keju.</item>
+        <item>A Minuman segar dikolaborasi dengan susu sapi australia.</item>
+        <item>A Chicken dengan sambal ijo.</item>
+    </string-array>
+</resources>

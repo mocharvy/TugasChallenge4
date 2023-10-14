@@ -1,0 +1,46 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentMenu">
+
+    <TextView
+        android:id="@+id/txtListMakanan"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:paddingStart="16dp"
+        android:text="List Menu Makanan"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewMenuGrid"
+        tools:ignore="HardcodedText,RtlSymmetry" />
+
+    <!-- Tombol Ganti Tampilan (Grid) -->
+    <ImageButton
+        android:id="@+id/changeLayout"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/baseline_grid_view_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewMenuGrid"
+        android:contentDescription="Change Layout Button"
+        tools:ignore="HardcodedText" />
+
+    <!-- RecyclerView untuk Daftar Menu Makanan dalam Grid -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMenuGrid"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/changeLayout"
+        app:spanCount="2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
