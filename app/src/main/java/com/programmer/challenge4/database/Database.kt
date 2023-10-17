@@ -5,7 +5,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.programmer.challenge4.database.CartItemDao
 import com.programmer.challenge4.item.CartItem
 
 @Database(entities = [CartItem::class], version = 1, exportSchema = false)

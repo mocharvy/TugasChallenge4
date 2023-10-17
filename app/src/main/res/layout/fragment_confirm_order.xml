@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.CartFragment">
+    tools:context=".MainActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -13,6 +13,37 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/btnBack2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="fitXY"
+                android:paddingTop="16dp"
+                android:paddingStart="16dp"
+                android:src="@drawable/arrow_left_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Konfirmasi Pesanan"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Garis Pemisah -->
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/btnBack2"/>
 
             <TextView
                 android:id="@+id/tv_method"
@@ -24,10 +55,10 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/divider1" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/bt_takeaway"
+                android:id="@+id/btnTakeAway"
                 android:layout_width="190dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="10dp"
@@ -39,7 +70,7 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/bt_delivery"
+                android:id="@+id/btnDelivery"
                 android:layout_width="190dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="10dp"
@@ -58,7 +89,7 @@
                 android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bt_takeaway" />
+                app:layout_constraintTop_toBottomOf="@id/btnTakeAway" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint_1"
@@ -105,7 +136,7 @@
                 app:layout_constraintTop_toBottomOf="@id/divider_2" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/bt_cash"
+                android:id="@+id/btnCash"
                 android:layout_width="190dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="10dp"
@@ -116,7 +147,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_payment" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/bt_wallet"
+                android:id="@+id/btnWallet"
                 android:layout_width="190dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="10dp"
@@ -125,6 +156,57 @@
                 app:cornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_payment" />
+
+            <TextView
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/btnWallet"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <!-- Ringkasan Pembayaran -->
+            <TextView
+                android:id="@+id/txtPaymentSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Ringkasan Pembayaran:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+            <!-- Total Pembayaran -->
+            <TextView
+                android:id="@+id/txtTotalPayment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="Total Pembayaran: Rp. 50.000"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPaymentSummary" />
+
+            <!-- Tombol Pesan -->
+            <Button
+                android:id="@+id/btnPlaceOrder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Pesan"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTotalPayment" />
+
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

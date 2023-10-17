@@ -23,6 +23,15 @@ class ConfirmOrderAdapter :
         }
     }
 
+    fun calculateTotalPrice(): Int {
+        var totalPrice = 0
+        currentList.forEach { cartItem ->
+            totalPrice += cartItem.totalPrice
+        }
+
+        return totalPrice
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = MenuItemBinding.inflate(inflater, parent, false)

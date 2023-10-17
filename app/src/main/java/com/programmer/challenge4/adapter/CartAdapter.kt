@@ -28,7 +28,7 @@ class CartAdapter(private val viewModel: CartViewModel) :
 
         holder.binding.btnPlus.setOnClickListener {
             // Menambah jumlah item
-            val quantity = currentItem.quantity++
+            currentItem.quantity++
             updateCartItem(currentItem)
             currentItem.totalPrice = currentItem.calculateTotalPrice()
             notifyItemChanged(holder.bindingAdapterPosition)

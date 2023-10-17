@@ -20,6 +20,7 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
+
         /* Inisialisasi RecyclerView */
         val recyclerViewMenuGrid: RecyclerView = view.findViewById(R.id.rv_menu_makanan)
 
