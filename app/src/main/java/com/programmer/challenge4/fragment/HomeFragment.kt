@@ -1,32 +1,80 @@
 package com.programmer.challenge4.fragment
+
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.programmer.challenge4.R
 import com.programmer.challenge4.adapter.MenuAdapter
+import com.programmer.challenge4.databinding.FragmentHomeBinding
 import com.programmer.challenge4.item.MenuItem
 
 class HomeFragment : Fragment() {
 
-    private var fragmentMenuListener: FragmentMenuListener? = null
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var sharedPrefs: SharedPreferences
+    private val PREFS_NAME = "my_shared_prefs"
+    private lateinit var layoutManagerGrid: GridLayoutManager
+    private lateinit var layoutManagerLinear: LinearLayoutManager
+    private lateinit var currentLayoutManager: RecyclerView.LayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        // Inflate the layout for this fragment
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = binding.root
 
+        // Inisialisasi SharedPreferences
+        sharedPrefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
-        /* Inisialisasi RecyclerView */
-        val recyclerViewMenuGrid: RecyclerView = view.findViewById(R.id.rv_menu_makanan)
+        // Inisialisasi LayoutManager untuk Grid dan Linear
+        layoutManagerGrid = GridLayoutManager(requireContext(), 2)
+        layoutManagerLinear = LinearLayoutManager(requireContext())
 
+        // Inisialisasi LayoutManager saat aplikasi pertama kali dibuka
+        val savedLayout = sharedPrefs.getString("layout", "grid") // "grid" adalah nilai default jika tidak ada yang tersimpan
+
+        if (savedLayout == "grid") {
+            currentLayoutManager = layoutManagerGrid
+            binding.btnList.setImageResource(R.drawable.baseline_grid_view_24)
+        } else {
+            currentLayoutManager = layoutManagerLinear
+            binding.btnList.setImageResource(R.drawable.list)
+        }
+
+        binding.rvMenuMakanan.layoutManager = currentLayoutManager
+
+        binding.btnList.setOnClickListener {
+            // Mengubah tata letak saat tombol diklik
+            if (currentLayoutManager == layoutManagerGrid) {
+                currentLayoutManager = layoutManagerLinear
+                binding.btnList.setImageResource(R.drawable.list)
+                sharedPrefs.edit().putString("layout", "linear").apply()
+            } else {
+                currentLayoutManager = layoutManagerGrid
+                binding.btnList.setImageResource(R.drawable.baseline_grid_view_24)
+                sharedPrefs.edit().putString("layout", "grid").apply()
+            }
+            binding.rvMenuMakanan.layoutManager = currentLayoutManager
+        }
+
+        setupMenu()
+
+        return view
+    }
+
+    private fun setupMenu() {
         // Inisialisasi data menu makanan Anda
         val menuItems = mutableListOf<MenuItem>()
-
         menuItems.add(
             MenuItem(
                 "Kentang Goreng",
@@ -93,9 +141,41 @@ class HomeFragment : Fragment() {
             )
         )
 
+        menuItems.add(
+            MenuItem(
+                "Kentang Goreng",
+                "Rp 20.000",
+                "Kentang Goreng pakai saus tomat",
+                R.drawable.kentang,
+                "Alamat Restoran 7",
+                "https://maps.app.google.gl/Kd1hbopN2DhnY4DQ9"
+            )
+        )
+
+        menuItems.add(
+            MenuItem(
+                "Chicken",
+                "Rp 20.000",
+                "Chicken dengan sambal ijo",
+                R.drawable.chicken,
+                "Alamat Restoran 8",
+                "https://maps.app.google.gl/Kd1hbopN2DhnY4DQ9"
+            )
+        )
+
+        menuItems.add(
+            MenuItem(
+                "Sushi",
+                "Rp 35.000",
+                "Sushi makanan favorit anak jaman now",
+                R.drawable.sushi,
+                "Alamat Restoran 9",
+                "https://maps.app.google.gl/Kd1hbopN2DhnY4DQ9"
+            )
+        )
+
         // Buat adapter untuk RecyclerView
         val adapter = MenuAdapter(menuItems) {
-
             // Ketika item di RecyclerView diklik, buat Bundle untuk mengirim data ke FragmentDetail
             val args = Bundle()
             args.putString("name", it.name)
@@ -105,22 +185,18 @@ class HomeFragment : Fragment() {
             args.putString("restaurantAddress", it.restaurantAddress)
             args.putString("googleMapsUrl", it.googleMapsUrl)
 
-            // Mengirim permintaan untuk menampilkan FragmentDetail
-            fragmentMenuListener?.onMenuItemClicked(args)
+            val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+            navController.navigate(R.id.fragmentDetails, args)
         }
 
         // Atur layout manager untuk RecyclerView
-        val layoutManager = GridLayoutManager(requireContext(), 2) // 2 kolom
-        recyclerViewMenuGrid.layoutManager = layoutManager
+        binding.rvMenuMakanan.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        // Set adapter ke RecyclerView
-        recyclerViewMenuGrid.adapter = adapter
 
-        return view
+        binding.rvMenuMakanan.adapter = adapter
     }
 
     interface FragmentMenuListener {
         fun onMenuItemClicked(args: Bundle)
     }
-
 }

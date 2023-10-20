@@ -5,21 +5,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.programmer.challenge4.databinding.MenuItemBinding
+import com.programmer.challenge4.databinding.FragmentOrderBinding
 import com.programmer.challenge4.item.CartItem
 
 
 class ConfirmOrderAdapter :
     ListAdapter<CartItem, ConfirmOrderAdapter.ViewHolder>(CartItemDiffCallback()) {
 
-    inner class ViewHolder(private val binding: MenuItemBinding) :
+    inner class ViewHolder(private val binding: FragmentOrderBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(cartItem: CartItem) {
-            binding.imgMakanan.setImageResource(cartItem.imageResourceId)
-            binding.txtCartItem.text = cartItem.foodName
-            "Rp. ${cartItem.totalPrice}".also { binding.txtItemPrice.text = it }
-            binding.txtQuantity.text = cartItem.quantity.toString()
+            binding.imgKeranjangItem.setImageResource(cartItem.imageResourceId)
+            binding.txtCartItemNama.text = cartItem.foodName
+            "Rp. ${cartItem.totalPrice}".also { binding.txtCartItemHarga.text = it }
+            binding.txtItemQuantity.text = cartItem.quantity.toString()
         }
     }
 
@@ -34,7 +34,7 @@ class ConfirmOrderAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = MenuItemBinding.inflate(inflater, parent, false)
+        val binding = FragmentOrderBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
     }
 

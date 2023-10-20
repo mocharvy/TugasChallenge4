@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.programmer.challenge4.adapter.CartAdapter
 import com.programmer.challenge4.databinding.FragmentCartBinding
@@ -26,23 +28,26 @@ class CartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCartBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application))[CartViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application)).get(CartViewModel::class.java)
 
 
         setupRecyclerView()
         observeCartItems()
 
         binding.btnpesan.setOnClickListener {
-            cartAdapter = CartAdapter(viewModel)
-            binding.rvMenuMakanan.setHasFixedSize(true)
-            binding.rvMenuMakanan.layoutManager = LinearLayoutManager(requireContext())
-            binding.rvMenuMakanan.adapter = cartAdapter
+            val navController = findNavController()
+            val action = CartFragmentDirections.actionCartFragmentToConfirmOrderActivity()
+            navController.navigate(action)
         }
 
         return binding.root
     }
     private fun setupRecyclerView() {
-        cartAdapter = CartAdapter(viewModel)
+        cartAdapter = CartAdapter(viewModel) { cartItem ->
+
+            viewModel.deleteCartItem(cartItem)
+
+        }
 
         binding.rvMenuMakanan.apply {
             adapter = cartAdapter
@@ -51,13 +56,12 @@ class CartFragment : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun observeCartItems() {
-        viewModel.allCartItems.observe(viewLifecycleOwner) { cartItems ->
+    private fun observeCartItems() =
+        viewModel.allCartItems.observe(viewLifecycleOwner, Observer { cartItems ->
             cartAdapter.submitList(cartItems)
             val totalPrice = cartAdapter.calculateTotalPrice()
             binding.txtTotalPrice.text = "Total Price: Rp. $totalPrice"
-        }
-    }
+        })
 
 
 }

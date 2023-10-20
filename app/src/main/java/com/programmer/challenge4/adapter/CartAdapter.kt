@@ -1,7 +1,5 @@
 package com.programmer.challenge4.adapter
 
-
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,7 +10,8 @@ import com.programmer.challenge4.databinding.CartItemBinding
 import com.programmer.challenge4.item.CartItem
 import com.programmer.challenge4.viewmodel.CartViewModel
 
-class CartAdapter(private val viewModel: CartViewModel) :
+class CartAdapter(private val viewModel: CartViewModel,
+                  private val onItemClick: (CartItem) -> Unit) :
     ListAdapter<CartItem, CartAdapter.CartViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
@@ -65,7 +64,6 @@ class CartAdapter(private val viewModel: CartViewModel) :
 
 
     inner class CartViewHolder(val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("SetTextI18n")
         fun bind(cartItem: CartItem) {
             binding.ivFood.setImageResource(cartItem.imageResourceId)
             binding.tvDesc.text = cartItem.foodName
@@ -77,21 +75,17 @@ class CartAdapter(private val viewModel: CartViewModel) :
     private fun showDeleteConfirmationDialog(holder: CartViewHolder) {
         val position = holder.bindingAdapterPosition
         if (position != RecyclerView.NO_POSITION) {
-            getItem(position)
+            val cartItem = getItem(position)
 
             AlertDialog.Builder(holder.itemView.context)
                 .setTitle("Delete Item")
-                .setMessage("Anda yakin ingin menghapus Item ini?")
+                .setMessage("Apakah yakin ingin menghapus Item ini?")
                 .setPositiveButton("Delete") { _, _ ->
-                    onItemClick()
+                    onItemClick(cartItem)
                 }
                 .setNegativeButton("Cancel", null)
                 .show()
         }
-    }
-
-    private fun onItemClick() {
-
     }
 
     companion object {

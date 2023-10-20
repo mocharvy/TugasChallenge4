@@ -1,13 +1,12 @@
-
+package com.programmer.challenge4
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.programmer.challenge4.MainActivity
 import com.programmer.challenge4.adapter.ConfirmOrderAdapter
 import com.programmer.challenge4.databinding.FragmentConfirmOrderBinding
 import com.programmer.challenge4.viewmodel.CartViewModel
@@ -25,8 +24,7 @@ class ConfirmOrderActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        viewModel = ViewModelProvider(this, ViewModelFactory(application)).get(
-            CartViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelFactory(application))[CartViewModel::class.java]
 
         confirmOrderAdapter = ConfirmOrderAdapter()
 
@@ -77,7 +75,6 @@ class ConfirmOrderActivity : AppCompatActivity() {
             }
 
 
-
         }
 
 
@@ -90,12 +87,13 @@ class ConfirmOrderActivity : AppCompatActivity() {
             LinearLayoutManager(context)
         }
     }
+    @SuppressLint("SetTextI18n")
     private fun observeCartItems() {
-        viewModel.allCartItems.observe(this, Observer { cartItems ->
+        viewModel.allCartItems.observe(this) { cartItems ->
             confirmOrderAdapter.submitList(cartItems)
             val totalPrice = confirmOrderAdapter.calculateTotalPrice()
             binding.txtTotalPayment.text = "Total Price: Rp. $totalPrice"
-        })
+        }
 
     }
 }

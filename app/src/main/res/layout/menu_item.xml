@@ -1,86 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<!-- res/layout/menu_item.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp">
+    android:orientation="vertical"
+    android:padding="8dp">
 
+    <!-- Gambar makanan -->
     <ImageView
         android:id="@+id/imgMakanan"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/dimsum"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
         android:scaleType="centerCrop"
-        />
+        android:src="@drawable/dimsum" />
 
-
-
+    <!-- Nama makanan -->
     <TextView
-        android:id="@+id/txtCartItem"
-        android:layout_width="0dp"
+        android:id="@+id/txtNamaMakanan"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@+id/imgMakanan"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Dimsum"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
-
-
-    <TextView
-        android:id="@+id/txtItemPrice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@+id/imgMakanan"
-        app:layout_constraintTop_toBottomOf="@+id/txtCartItem"
-        android:text="Rp. 20.000"
-        android:textSize="14sp"
-        />
-
-
-
-    <TextView
-        android:id="@+id/txtQuantity"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtItemPrice"
-        android:text="1"
+        android:text="Dimsum "
         android:textSize="16sp"
         android:textStyle="bold"
-        android:gravity="center"
-        />
+        android:layout_marginTop="8dp"/>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgMakanan"
-        android:background="@color/black"
-        />
-
+    <!-- Harga makanan -->
     <TextView
-        android:id="@+id/txtCartNote"
-        android:layout_width="0dp"
+        android:id="@+id/txtTotalMakanan"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        android:text="Catatan:"
+        android:text="Rp 20.000"
         android:textSize="14sp"
-        android:textStyle="bold"
-        />
+        android:layout_marginTop="4dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
-
+</LinearLayout>

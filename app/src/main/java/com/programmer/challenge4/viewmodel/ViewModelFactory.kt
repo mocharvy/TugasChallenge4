@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.programmer.challenge4.database.CartDatabase
 import com.programmer.challenge4.repository.CartRepository
 
-@Suppress("UNCHECKED_CAST")
+
 class ViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CartViewModel::class.java)) {

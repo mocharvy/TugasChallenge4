@@ -8,10 +8,6 @@ class CartRepository(private val cartDao: CartItemDao) {
 
     val allCartItems: LiveData<List<CartItem>> = cartDao.getAllCartItems()
 
-    private fun getAllCartItems() {
-
-    }
-
     fun insertCartItem(cartItem: CartItem) {
         cartDao.insertCartItem(cartItem)
     }

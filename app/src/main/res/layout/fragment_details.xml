@@ -6,7 +6,7 @@
     android:id="@+id/detailFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentDetails">
+    tools:context=".DetailsActivity">
 
     <!-- Tampilan gambar makanan di bagian atas -->
     <ImageView
@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/kembali" />
+        app:layout_constraintTop_toBottomOf="@id/btkembali" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_star"
@@ -45,7 +45,7 @@
 
     <!-- Tombol kembali di pojok kiri atas -->
     <ImageView
-        android:id="@+id/kembali"
+        android:id="@+id/btkembali"
         android:layout_width="60dp"
         android:layout_height="70dp"
         android:paddingTop="16dp"
