@@ -1,11 +1,11 @@
 package com.programmer.challenge4.database
 
-
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.programmer.challenge4.item.CartItem
+
 
 @Database(entities = [CartItem::class], version = 1, exportSchema = false)
 abstract class CartDatabase : RoomDatabase() {
@@ -25,7 +25,7 @@ abstract class CartDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     CartDatabase::class.java,
-                    "database"
+                    "cart_database"
                 ).build()
 
                 INSTANCE = instance

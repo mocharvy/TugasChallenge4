@@ -13,7 +13,6 @@ class CartViewModel(private val repository: CartRepository) : ViewModel() {
 
     val allCartItems: LiveData<List<CartItem>> = repository.allCartItems
 
-
     fun insertCartItem(cartItem: CartItem) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
@@ -41,7 +40,5 @@ class CartViewModel(private val repository: CartRepository) : ViewModel() {
             }
         }
     }
-
-
 
 }

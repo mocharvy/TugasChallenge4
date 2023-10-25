@@ -12,9 +12,7 @@ data class CartItem(
     var price: Int,
     var quantity: Int,
     val imageResourceId: Int
-
-)
-{
+) {
     fun calculateTotalPrice(): Int {
         return quantity * price
     }

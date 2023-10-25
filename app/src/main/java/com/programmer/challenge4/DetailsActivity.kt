@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.programmer.challenge4.databinding.FragmentDetailsBinding
+import com.programmer.challenge4.databinding.ActivityDetailsBinding
 import com.programmer.challenge4.item.CartItem
 import com.programmer.challenge4.viewmodel.CartViewModel
 import com.programmer.challenge4.viewmodel.ViewModelFactory
@@ -14,7 +14,7 @@ import com.programmer.challenge4.viewmodel.ViewModelFactory
 
 class DetailsActivity : AppCompatActivity() {
 
-    private lateinit var binding: FragmentDetailsBinding
+    private lateinit var binding: ActivityDetailsBinding
     private lateinit var googleMapsUrl: String
     private var quantity = 0
     private var priceItem = 0
@@ -23,7 +23,7 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentDetailsBinding.inflate(layoutInflater)
+        binding = ActivityDetailsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -48,7 +48,7 @@ class DetailsActivity : AppCompatActivity() {
 
         imageRes?.let { updateUI(name, price.toString(), description, it, restaurantAddress) }
 
-
+        // Tambahkan onClickListener untuk tombol kembali
         binding.btkembali.setOnClickListener{
             finish()
         }
@@ -88,7 +88,6 @@ class DetailsActivity : AppCompatActivity() {
                 Toast.makeText(this@DetailsActivity, "Jumlah item tidak boleh 0!", Toast.LENGTH_SHORT).show()
 
             }
-
 
 
         }

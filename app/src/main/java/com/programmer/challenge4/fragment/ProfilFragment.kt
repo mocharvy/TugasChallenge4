@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment
 import com.programmer.challenge4.R
 
 class ProfileFragment : Fragment() {
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

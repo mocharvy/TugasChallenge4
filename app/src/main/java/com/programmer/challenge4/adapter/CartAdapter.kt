@@ -1,5 +1,6 @@
 package com.programmer.challenge4.adapter
 
+
 import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -79,7 +80,7 @@ class CartAdapter(private val viewModel: CartViewModel,
 
             AlertDialog.Builder(holder.itemView.context)
                 .setTitle("Delete Item")
-                .setMessage("Apakah yakin ingin menghapus Item ini?")
+                .setMessage("Anda yakin ingin menghapus Item ini?")
                 .setPositiveButton("Delete") { _, _ ->
                     onItemClick(cartItem)
                 }

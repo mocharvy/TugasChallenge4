@@ -1,6 +1,5 @@
 package com.programmer.challenge4.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +25,7 @@ class CartFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentCartBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application)).get(CartViewModel::class.java)
 
@@ -55,13 +54,13 @@ class CartFragment : Fragment() {
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun observeCartItems() =
+    private fun observeCartItems() {
         viewModel.allCartItems.observe(viewLifecycleOwner, Observer { cartItems ->
             cartAdapter.submitList(cartItems)
             val totalPrice = cartAdapter.calculateTotalPrice()
             binding.txtTotalPrice.text = "Total Price: Rp. $totalPrice"
         })
+    }
 
 
 }

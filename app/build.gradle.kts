@@ -2,14 +2,12 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs")
-    id("kotlin-parcelize")
     id("kotlin-kapt")
-
 }
 
 android {
     namespace = "com.programmer.challenge4"
-    compileSdk = 34
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.programmer.challenge4"
@@ -19,9 +17,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    buildFeatures{
-        viewBinding = true
     }
 
     buildTypes {
@@ -33,6 +28,9 @@ android {
             )
         }
     }
+    buildFeatures{
+        viewBinding = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -40,8 +38,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-}
 
+}
 
 dependencies {
     implementation("androidx.core:core-ktx:1.9.0")
@@ -54,7 +52,8 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.1")
     implementation("androidx.room:room-ktx:2.5.2")
     implementation ("androidx.room:room-runtime:2.5.2")
-    kapt ("androidx.room:room-compiler:2.5.2")
+    kapt("androidx.room:room-compiler:2.5.2")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")}
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}

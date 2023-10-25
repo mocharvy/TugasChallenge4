@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.programmer.challenge4.databinding.FragmentOrderBinding
 import com.programmer.challenge4.item.CartItem
 
-
 class ConfirmOrderAdapter :
     ListAdapter<CartItem, ConfirmOrderAdapter.ViewHolder>(CartItemDiffCallback()) {
 
@@ -18,11 +17,10 @@ class ConfirmOrderAdapter :
         fun bind(cartItem: CartItem) {
             binding.imgKeranjangItem.setImageResource(cartItem.imageResourceId)
             binding.txtCartItemNama.text = cartItem.foodName
-            "Rp. ${cartItem.totalPrice}".also { binding.txtCartItemHarga.text = it }
+            binding.txtCartItemHarga.text = "Rp. ${cartItem.totalPrice}"
             binding.txtItemQuantity.text = cartItem.quantity.toString()
         }
     }
-
     fun calculateTotalPrice(): Int {
         var totalPrice = 0
         currentList.forEach { cartItem ->

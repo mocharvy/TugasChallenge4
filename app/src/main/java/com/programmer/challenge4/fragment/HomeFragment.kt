@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.programmer.challenge4.R
 import com.programmer.challenge4.adapter.MenuAdapter
 import com.programmer.challenge4.databinding.FragmentHomeBinding
@@ -19,184 +18,159 @@ import com.programmer.challenge4.item.MenuItem
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var adapter: MenuAdapter
     private lateinit var sharedPrefs: SharedPreferences
-    private val PREFS_NAME = "my_shared_prefs"
-    private lateinit var layoutManagerGrid: GridLayoutManager
-    private lateinit var layoutManagerLinear: LinearLayoutManager
-    private lateinit var currentLayoutManager: RecyclerView.LayoutManager
+    private val PREF_NAME = "MyPrefs"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val view = binding.root
+        setupMenu()
 
-        // Inisialisasi SharedPreferences
-        sharedPrefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        sharedPrefs = requireActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
-        // Inisialisasi LayoutManager untuk Grid dan Linear
-        layoutManagerGrid = GridLayoutManager(requireContext(), 2)
-        layoutManagerLinear = LinearLayoutManager(requireContext())
+        val layoutManagerGrid = GridLayoutManager(requireContext(), 2)
+        val layoutManagerLinear = LinearLayoutManager(requireContext())
 
-        // Inisialisasi LayoutManager saat aplikasi pertama kali dibuka
-        val savedLayout = sharedPrefs.getString("layout", "grid") // "grid" adalah nilai default jika tidak ada yang tersimpan
+        //Inisialisasi layout manager saat membuka aplikasi
+        val savedLayout = sharedPrefs.getString("layout", "grid") ?: "grid"
 
-        if (savedLayout == "grid") {
-            currentLayoutManager = layoutManagerGrid
+        var currentLayoutManager = if (savedLayout == "grid") {
             binding.btnList.setImageResource(R.drawable.baseline_grid_view_24)
+            layoutManagerGrid
         } else {
-            currentLayoutManager = layoutManagerLinear
             binding.btnList.setImageResource(R.drawable.list)
+            layoutManagerLinear
         }
 
         binding.rvMenuMakanan.layoutManager = currentLayoutManager
 
         binding.btnList.setOnClickListener {
-            // Mengubah tata letak saat tombol diklik
-            if (currentLayoutManager == layoutManagerGrid) {
-                currentLayoutManager = layoutManagerLinear
+            currentLayoutManager = if (currentLayoutManager == layoutManagerGrid) {
                 binding.btnList.setImageResource(R.drawable.list)
                 sharedPrefs.edit().putString("layout", "linear").apply()
+                layoutManagerLinear
             } else {
-                currentLayoutManager = layoutManagerGrid
                 binding.btnList.setImageResource(R.drawable.baseline_grid_view_24)
                 sharedPrefs.edit().putString("layout", "grid").apply()
+                layoutManagerGrid
             }
             binding.rvMenuMakanan.layoutManager = currentLayoutManager
         }
 
-        setupMenu()
-
-        return view
+        return binding.root
     }
 
     private fun setupMenu() {
-        // Inisialisasi data menu makanan Anda
-        val menuItems = mutableListOf<MenuItem>()
-        menuItems.add(
-            MenuItem(
-                "Kentang Goreng",
-                "Rp 20.000",
-                "Kentang Goreng pakai saus tomat",
-                R.drawable.kentang,
-                "Alamat Restoran 1",
-                "https://maps.app.google.gl/Kd1hbopN2DhnY4DQ9"
-            )
-        )
-
-        menuItems.add(
-            MenuItem(
-                "Chicken",
-                "Rp 20.000",
-                "Chicken dengan sambal ijo",
-                R.drawable.chicken,
-                "Alamat Restoran 2",
-                "https://maps.app.google.gl/Kd1hbopN2DhnY4DQ9"
-            )
-        )
-
-        menuItems.add(
-            MenuItem(
-                "Sushi",
-                "Rp 35.000",
-                "Sushi makanan favorit anak jaman now",
-                R.drawable.sushi,
-                "Alamat Restoran 3",
-                "https://maps.app.google.gl/Kd1hbopN2DhnY4DQ9"
-            )
-        )
-
-        menuItems.add(
-            MenuItem(
-                "Dimsum",
-                "Rp 25.000",
-                "Dimsum makanan paling dicari semua orang mau anak-anak, remaja, hingga dewasa",
-                R.drawable.dimsum,
-                "Alamat Restoran 4",
-                "https://maps.app.google.gl/Kd1hbopN2DhnY4DQ9"
-            )
-        )
-
-        menuItems.add(
-            MenuItem(
-                "Burger",
-                "Rp 25.000",
-                "Burger big dengan varian baru dibalut saus keju",
-                R.drawable.chicken,
-                "Alamat Restoran 5",
-                "https://maps.app.google.gl/Kd1hbopN2DhnY4DQ9"
-            )
-        )
-
-        menuItems.add(
-            MenuItem(
-                "Strawberry Milk",
-                "Rp 15.000",
-                "Minuman segar dikolaborasi dengan susu sapi australia",
-                R.drawable.chicken,
-                "Alamat Restoran 6",
-                "https://maps.app.google.gl/Kd1hbopN2DhnY4DQ9"
-            )
-        )
-
-        menuItems.add(
-            MenuItem(
-                "Kentang Goreng",
-                "Rp 20.000",
-                "Kentang Goreng pakai saus tomat",
-                R.drawable.kentang,
-                "Alamat Restoran 7",
-                "https://maps.app.google.gl/Kd1hbopN2DhnY4DQ9"
-            )
-        )
-
-        menuItems.add(
-            MenuItem(
-                "Chicken",
-                "Rp 20.000",
-                "Chicken dengan sambal ijo",
-                R.drawable.chicken,
-                "Alamat Restoran 8",
-                "https://maps.app.google.gl/Kd1hbopN2DhnY4DQ9"
-            )
-        )
-
-        menuItems.add(
-            MenuItem(
-                "Sushi",
-                "Rp 35.000",
-                "Sushi makanan favorit anak jaman now",
-                R.drawable.sushi,
-                "Alamat Restoran 9",
-                "https://maps.app.google.gl/Kd1hbopN2DhnY4DQ9"
-            )
-        )
-
-        // Buat adapter untuk RecyclerView
-        val adapter = MenuAdapter(menuItems) {
-            // Ketika item di RecyclerView diklik, buat Bundle untuk mengirim data ke FragmentDetail
-            val args = Bundle()
-            args.putString("name", it.name)
-            args.putString("price", it.price)
-            args.putString("description", it.description)
-            args.putInt("imageRes", it.imageRes)
-            args.putString("restaurantAddress", it.restaurantAddress)
-            args.putString("googleMapsUrl", it.googleMapsUrl)
-
+        val menuItems = getMenuItems()
+        adapter = MenuAdapter(menuItems) { selectedItem ->
+            val bundle = Bundle().apply {
+                putString("name", selectedItem.name)
+                putInt("price", selectedItem.price)
+                putString("description", selectedItem.description)
+                putInt("imageRes", selectedItem.imageRes)
+                putString("restaurantAddress", selectedItem.restaurantAddress)
+                putString("googleMapsUrl", selectedItem.googleMapsUrl)
+            }
             val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-            navController.navigate(R.id.fragmentDetails, args)
+            navController.navigate(R.id.detailActivity, bundle)
         }
-
-        // Atur layout manager untuk RecyclerView
-        binding.rvMenuMakanan.layoutManager = GridLayoutManager(requireContext(), 2)
-
-
         binding.rvMenuMakanan.adapter = adapter
     }
 
-    interface FragmentMenuListener {
-        fun onMenuItemClicked(args: Bundle)
+    private fun getMenuItems(): List<MenuItem> {
+        val menuItems = mutableListOf<MenuItem>()
+        menuItems.add(MenuItem(
+            "Dimsum",
+            20000,
+            "Dimsum makanan paling dicari semua orang mau anak-anak, remaja, hingga dewasa!",
+            R.drawable.dimsum,
+            "Bandung",
+            "https://maps.app.goo.gl/Kd1hbopN2DhnY4DQ9"
+        ))
+
+        menuItems.add(MenuItem(
+            "Kentang",
+            20000,
+            "Kentang Goreng pakai saus tomat",
+            R.drawable.kentang,
+            "Jakarta",
+            "https://maps.app.goo.gl/2yxKvmefahrrB9u19"
+        ))
+
+        menuItems.add(MenuItem(
+            "Burger",
+            15000,
+            "Burger big dengan varian baru dibalut saus keju",
+            R.drawable.burger,
+            "Depok",
+            "https://maps.app.goo.gl/eQdfDWJbbu2GFCMm9"
+        ))
+
+        menuItems.add(MenuItem(
+            "Sushi",
+            35000,
+            "Sushi makanan favorit anak jaman now",
+            R.drawable.sushi,
+            "Surabaya",
+            "https://maps.app.goo.gl/5pN2U8kR9y3QDjBE6"
+        ))
+
+        menuItems.add(MenuItem(
+            "Strawberry Milk",
+            10000,
+            "Minuman segar dikolaborasi dengan susu sapi australia",
+            R.drawable.strawberry_milk,
+            "Bogor",
+            "https://maps.app.goo.gl/vNGTFJRV1FFeVko1A"
+        ))
+
+        menuItems.add(MenuItem(
+            "Chicken",
+            25000,
+            "Chicken dengan sambal ijo",
+            R.drawable.chicken,
+            "Garut",
+            "https://maps.app.goo.gl/cMSAqxLjtVUTNP2Z9"
+        ))
+        menuItems.add(MenuItem(
+            "Dimsum",
+            25000,
+            "Dimsum makanan paling dicari semua orang mau anak-anak, remaja, hingga dewasa!",
+            R.drawable.dimsum,
+            "Bandung",
+            "https://maps.app.goo.gl/Kd1hbopN2DhnY4DQ9"
+        ))
+
+        menuItems.add(MenuItem(
+            "Kentang",
+            20000,
+            "Kentang Goreng pakai saus tomat",
+            R.drawable.kentang,
+            "Jakarta",
+            "https://maps.app.goo.gl/2yxKvmefahrrB9u19"
+        ))
+
+        menuItems.add(MenuItem(
+            "Burger",
+            15000,
+            "Burger big dengan varian baru dibalut saus keju",
+            R.drawable.burger,
+            "Depok",
+            "https://maps.app.goo.gl/eQdfDWJbbu2GFCMm9"
+        ))
+
+        menuItems.add(MenuItem(
+            "Sushi",
+            35000,
+            "Sushi makanan favorit anak jaman now",
+            R.drawable.sushi,
+            "Surabaya",
+            "https://maps.app.goo.gl/5pN2U8kR9y3QDjBE6"
+        ))
+
+        return menuItems
     }
 }

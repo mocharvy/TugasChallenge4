@@ -1,5 +1,5 @@
 package com.programmer.challenge4
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -58,7 +58,7 @@ class ConfirmOrderActivity : AppCompatActivity() {
                     "Metode Pembayaran: $paymentMethod"
 
             if (deliveryMethod.isEmpty() || paymentMethod.isEmpty()){
-                Toast.makeText(this@ConfirmOrderActivity, "Tolong isi metode yang masih kosong!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ConfirmOrderActivity, "Mohon untuk diisi metode yang kosong!", Toast.LENGTH_SHORT).show()
             }else{
                 val alertDialog = AlertDialog.Builder(this)
                     .setTitle("Order Summary")
@@ -82,12 +82,12 @@ class ConfirmOrderActivity : AppCompatActivity() {
     }
     private fun setupRecyclerView() {
 
-        binding.root.apply {
+        binding.rvOrder.apply {
             confirmOrderAdapter
             LinearLayoutManager(context)
         }
     }
-    @SuppressLint("SetTextI18n")
+
     private fun observeCartItems() {
         viewModel.allCartItems.observe(this) { cartItems ->
             confirmOrderAdapter.submitList(cartItems)
