@@ -80,7 +80,7 @@ class CartAdapter(private val viewModel: CartViewModel,
 
             AlertDialog.Builder(holder.itemView.context)
                 .setTitle("Delete Item")
-                .setMessage("Anda yakin ingin menghapus Item ini?")
+                .setMessage("Apakah yakin akan menghapus Item ini?")
                 .setPositiveButton("Delete") { _, _ ->
                     onItemClick(cartItem)
                 }

@@ -6,7 +6,7 @@
         android:title="Home"
         android:icon="@drawable/home_icon" />
     <item
-        android:id="@+id/keranjangFragment"
+        android:id="@+id/cartFragment"
         android:title="Keranjang"
         android:icon="@drawable/baseline_shopping_cart_24" />
     <item

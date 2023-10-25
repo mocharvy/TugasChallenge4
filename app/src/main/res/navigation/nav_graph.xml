@@ -42,7 +42,8 @@
     <activity
         android:id="@+id/confirmOrderActivity"
         android:name="com.programmer.challenge4.ConfirmOrderActivity"
-        android:label="ConfirmOrderActivity" />
+        android:label="ConfirmOrderActivity"
+        tools:layout="@layout/activity_confirm_order"/>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.programmer.challenge4.fragment.ProfileFragment"

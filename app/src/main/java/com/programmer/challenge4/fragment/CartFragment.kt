@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +24,7 @@ class CartFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCartBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application)).get(CartViewModel::class.java)
 
@@ -55,11 +54,11 @@ class CartFragment : Fragment() {
     }
 
     private fun observeCartItems() {
-        viewModel.allCartItems.observe(viewLifecycleOwner, Observer { cartItems ->
+        viewModel.allCartItems.observe(viewLifecycleOwner) { cartItems ->
             cartAdapter.submitList(cartItems)
             val totalPrice = cartAdapter.calculateTotalPrice()
             binding.txtTotalPrice.text = "Total Price: Rp. $totalPrice"
-        })
+        }
     }
 
 

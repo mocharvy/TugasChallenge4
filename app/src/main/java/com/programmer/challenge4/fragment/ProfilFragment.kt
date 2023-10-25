@@ -5,13 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.programmer.challenge4.R
+import com.programmer.challenge4.databinding.FragmentProfilBinding
 
 class ProfileFragment : Fragment() {
+
+    private lateinit var binding: FragmentProfilBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_profil, container, false)
+        binding = FragmentProfilBinding.inflate(inflater, container, false)
+
+
+
+        return binding.root
     }
 }

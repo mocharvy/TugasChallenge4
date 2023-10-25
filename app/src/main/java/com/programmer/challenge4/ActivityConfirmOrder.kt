@@ -8,19 +8,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.programmer.challenge4.adapter.ConfirmOrderAdapter
-import com.programmer.challenge4.databinding.FragmentConfirmOrderBinding
+import com.programmer.challenge4.databinding.ActivityConfirmOrderBinding
 import com.programmer.challenge4.viewmodel.CartViewModel
 import com.programmer.challenge4.viewmodel.ViewModelFactory
 
 class ConfirmOrderActivity : AppCompatActivity() {
 
-    private lateinit var binding: FragmentConfirmOrderBinding
+    private lateinit var binding: ActivityConfirmOrderBinding
     private lateinit var viewModel: CartViewModel
     private lateinit var confirmOrderAdapter: ConfirmOrderAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentConfirmOrderBinding.inflate(layoutInflater)
+        binding = ActivityConfirmOrderBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
